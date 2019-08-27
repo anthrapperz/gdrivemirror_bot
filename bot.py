@@ -90,7 +90,8 @@ def start_bot(bot, update):
 					sent_message.edit_text(Text.UPLOADING_GD)
 					dwnld_url = upload.upload(filename)
 					size = (os.path.getsize(filename))/1048576
-					sent_message.edit_text(Text.DONE.format(filename, size, dwnld_url),parse_mode=telegram.ParseMode.HTML)
+					short_link = upload.shorten(dwnld_url)
+					sent_message.edit_text(Text.DONE.format(filename, size, short_link),parse_mode=telegram.ParseMode.HTML)
 					os.remove(filename)
 			elif(user_cmd == "audio"):
 				if("youtube" in url or "youtu" in url):
@@ -119,8 +120,8 @@ def start_bot(bot, update):
 							bot.send_chat_action(chat_id=update.message.chat_id, action=telegram.ChatAction.TYPING)
 							sent_message.edit_text(Text.UPLOADING_GD)
 							dwnld_url = upload.upload(raw_file)
-							sent_message.edit_text(Text.DONE.format(raw_file, size, dwnld_url),parse_mode=telegram.ParseMode.HTML)
-							os.remove(raw_file)
+							short_link = upload.shorten(dwnld_url)
+							sent_message.edit_text(Text.DONE.format(raw_file, size, short_link),parse_mode=telegram.ParseMode.HTML)
 					else:
 						sent_message.edit_text(Text.MAXLIMITEXCEEDED)
 				else:
@@ -133,7 +134,8 @@ def start_bot(bot, update):
 					bot.send_chat_action(chat_id=update.message.chat_id, action=telegram.ChatAction.TYPING)
 					sent_message.edit_text(Text.UPLOADING_GD)
 					dwnld_url = upload.upload(raw_file)
-					sent_message.edit_text(Text.DONE.format(raw_file, size, dwnld_url),parse_mode=telegram.ParseMode.HTML)
+					short_link = upload.shorten(dwnld_url)
+					sent_message.edit_text(Text.DONE.format(raw_file, size, short_link),parse_mode=telegram.ParseMode.HTML)
 			 		os.remove(raw_file)
 				else:
 					sent_message.edit_text(Text.MAXLIMITEXCEEDED)
