@@ -125,7 +125,7 @@ def upload(filename):
 def shorten(dwnld_url):	
 	URL = dwnld_url	
 	api_token = Creds.SHORTNER_API_TOKEN	
-	api_url = "https://shortzon.com/api?api="+api_token+"/"+URL	
+	api_url = "https://shortzon.com/api?api="+api_token+"&"+URL+"="+"&alias=CustomAlias"	
 	r = requests.get(api_url)	
 	data = r.json()	
 	shortened_url = data.get('shortenedUrl')	
