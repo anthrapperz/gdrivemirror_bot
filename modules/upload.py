@@ -122,7 +122,14 @@ def upload(filename):
 		return ERROR
 		print(upload_file(filename, file_name, mime_type))
 	return download_url
-
+def shorten(dwnld_url):	
+	URL = dwnld_url	
+	api_token = Creds.SHORTNER_API_TOKEN	
+	api_url = "https://shortzon.com/api?api="+api_token+"/"+URL	
+	r = requests.get(api_url)	
+	data = r.json()	
+	shortened_url = data.get('shortenedUrl')	
+	return shortened_url
 
 
 
